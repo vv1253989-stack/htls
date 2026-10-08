@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SELEXN | Biology Test Series</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --primary:#6c5ce7; --primary-light:#a29bfe; --primary-dark:#5649c0;
+  --secondary:#00cec9; --accent:#fd79a8; --success:#00b894; --warning:#fdcb6e;
+  --bg:#f5f6fa; --card:#ffffff; --text:#2d3436; --text-secondary:#636e72;
+  --border:#e4e8ee; --header-bg:linear-gradient(135deg,#6c5ce7,#5649c0);
+  --shadow:0 10px 30px rgba(108,92,231,.12);
+  --shadow-hover:0 18px 40px rgba(108,92,231,.25);
+  --transition:all .35s cubic-bezier(.25,.8,.25,1);
+}
+body.dark{
+  --bg:#12122a; --card:#1c1c38; --text:#e8e8f5; --text-secondary:#9d9dbb;
+  --border:#2c2c50; --shadow:0 10px 30px rgba(0,0,0,.4);
+  --shadow-hover:0 18px 40px rgba(0,0,0,.55);
+  --header-bg:linear-gradient(135deg,#4a3db5,#342a8a);
+}
+*{-webkit-tap-highlight-color:transparent;margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+  line-height:1.6; overflow-x:hidden; transition:background .35s ease,color .35s ease;
+  min-height:100vh;
+}
+body::before{
+  content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(700px 400px at 10% -5%, rgba(108,92,231,.14), transparent 60%),
+    radial-gradient(600px 380px at 95% 5%, rgba(0,206,201,.12), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(253,121,168,.10), transparent 60%);
+}
+.topbar{
+  position:sticky; top:0; z-index:1000; height:64px;
+  background:var(--header-bg); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 18px; box-shadow:0 4px 20px rgba(86,73,192,.35);
+  transition:background .35s ease;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;letter-spacing:.5px;color:#fff;text-decoration:none}
+.brand i{font-size:1.35rem}
+.brand .btxt{display:flex;flex-direction:column;line-height:1.05}
+.brand small{font-size:.6rem;font-weight:400;opacity:.85;letter-spacing:1.8px}
+.top-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.14);
+  color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:var(--transition);font-size:.95rem;
+}
+.icon-btn:hover{background:rgba(255,255,255,.3);transform:translateY(-2px)}
+.hero{max-width:1100px;margin:0 auto;padding:48px 20px 12px;text-align:center}
+.credit-badge{
+  background:linear-gradient(135deg,#6c5ce7,#a29bfe); color:#fff;
+  padding:7px 22px; border-radius:30px; font-size:.8rem; font-weight:600;
+  letter-spacing:1.2px; display:inline-flex; align-items:center; gap:9px;
+  margin-bottom:20px; box-shadow:0 6px 22px rgba(108,92,231,.4);
+  animation:glow 2s ease-in-out infinite alternate;
+}
+body.dark .credit-badge{background:linear-gradient(135deg,#4a3db5,#342a8a)}
+.credit-badge i{font-size:.65rem;animation:spark 1.5s ease-in-out infinite}
+@keyframes glow{0%{box-shadow:0 6px 22px rgba(108,92,231,.35)}100%{box-shadow:0 8px 34px rgba(108,92,231,.65),0 0 44px rgba(162,155,254,.35)}}
+@keyframes spark{0%,100%{opacity:.5;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+.hero h1{
+  font-size:clamp(2rem,5vw,3rem); font-weight:800; letter-spacing:-1px;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark) 40%,var(--accent));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+}
+.hero p{color:var(--text-secondary);font-size:1rem;max-width:640px;margin:0 auto}
+.stats{
+  max-width:1100px;margin:26px auto 0;padding:0 20px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+}
+.stat{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:16px 10px;text-align:center;box-shadow:var(--shadow);transition:var(--transition);
+}
+.stat:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.stat i{font-size:1.15rem;color:var(--primary);margin-bottom:6px;display:block}
+.stat .v{font-size:1.35rem;font-weight:800;color:var(--text);line-height:1.1}
+.stat .l{font-size:.72rem;color:var(--text-secondary);letter-spacing:.6px;text-transform:uppercase}
+.toolbar{max-width:1100px;margin:30px auto 0;padding:0 20px;display:flex;flex-direction:column;gap:14px;align-items:center}
+.search-wrap{position:relative;width:100%;max-width:460px}
+.search-wrap i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text-secondary);font-size:.9rem}
+#search{
+  width:100%;padding:13px 18px 13px 44px;border-radius:14px;border:1px solid var(--border);
+  background:var(--card);color:var(--text);font-size:.92rem;outline:none;transition:var(--transition);
+  box-shadow:var(--shadow);
+}
+#search::placeholder{color:var(--text-secondary)}
+#search:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(108,92,231,.14)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chip{
+  border:1px solid var(--border); background:var(--card); color:var(--text-secondary);
+  padding:7px 16px; border-radius:20px; font-size:.78rem; font-weight:600; cursor:pointer;
+  transition:var(--transition);
+}
+.chip:hover{border-color:var(--primary-light);color:var(--primary);transform:translateY(-2px)}
+.chip.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 6px 16px rgba(108,92,231,.35)}
+.section-title{
+  max-width:1100px;margin:34px auto 14px;padding:0 20px;
+  display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;
+}
+.section-title i{color:var(--primary)}
+.section-title .count{
+  font-size:.72rem; font-weight:700; background:rgba(108,92,231,.1); color:var(--primary);
+  padding:3px 11px; border-radius:20px; letter-spacing:.5px;
+}
+.section-title .line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.grid{
+  max-width:1100px;margin:0 auto;padding:6px 20px 40px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;
+}
+.test-card{
+  position:relative;background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:22px;box-shadow:var(--shadow);overflow:hidden;
+  transition:var(--transition);cursor:pointer;text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;opacity:0;transform:translateY(18px);
+  animation:rise .5s forwards;
+}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+.test-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
+}
+.test-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover);border-color:var(--primary-light)}
+.test-card:hover::before{transform:scaleX(1)}
+.test-card:active{transform:translateY(-3px) scale(.995)}
+.test-card:focus-visible{outline:3px solid var(--primary-light);outline-offset:3px}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:10px}
+.num-badge{
+  width:56px;height:56px;border-radius:16px;flex-shrink:0;
+  background:var(--header-bg);color:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;font-weight:800;line-height:1;
+  box-shadow:0 8px 20px rgba(108,92,231,.35);
+}
+.num-badge .n{font-size:1.35rem}
+.num-badge .t{font-size:.55rem;letter-spacing:1.2px;opacity:.85;margin-top:3px}
+.tag{
+  font-size:.63rem;font-weight:700;letter-spacing:.8px;padding:4px 11px;border-radius:20px;
+  text-transform:uppercase;white-space:nowrap;
+}
+.tag.new{background:rgba(0,184,148,.14);color:var(--success);border:1px solid rgba(0,184,148,.3)}
+.tag.bio{background:rgba(108,92,231,.12);color:var(--primary);border:1px solid rgba(108,92,231,.25)}
+body.dark .tag.new{background:rgba(0,184,148,.18);color:#2fe0b8}
+body.dark .tag.bio{background:rgba(162,155,254,.15);color:var(--primary-light);border-color:rgba(162,155,254,.25)}
+.test-card h3{font-size:1.12rem;font-weight:700;margin-bottom:4px}
+.test-card .sub{font-size:.78rem;color:var(--text-secondary);margin-bottom:16px;letter-spacing:.3px}
+.meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.meta-pill{
+  display:flex;align-items:center;gap:6px;font-size:.73rem;font-weight:600;
+  background:rgba(108,92,231,.07);color:var(--primary);
+  border:1px solid rgba(108,92,231,.15);padding:5px 11px;border-radius:20px;
+}
+body.dark .meta-pill{background:rgba(162,155,254,.12);color:var(--primary-light);border-color:rgba(162,155,254,.2)}
+.card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.start-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--primary);color:#fff;border:none;border-radius:12px;
+  padding:11px 16px;font-size:.87rem;font-weight:600;transition:var(--transition);
+  cursor:pointer;
+}
+.test-card:hover .start-btn{background:var(--primary-dark);box-shadow:0 8px 20px rgba(108,92,231,.4)}
+.arrow{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(108,92,231,.08);color:var(--primary);transition:var(--transition);
+}
+.test-card:hover .arrow{background:var(--primary);color:#fff;transform:translateX(3px)}
+.empty{
+  grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-secondary);
+}
+.empty i{font-size:2.5rem;color:var(--border);margin-bottom:14px;display:block}
+.powered{
+  display:flex;align-items:center;gap:14px;justify-content:center;
+  padding:26px 20px 44px;max-width:520px;margin:0 auto;
+}
+.powered .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+.powered .txt{
+  font-size:.78rem;color:var(--text-secondary);white-space:nowrap;
+  display:flex;align-items:center;gap:7px;
+}
+.powered .txt strong{
+  background:linear-gradient(135deg,#6c5ce7,#fd79a8);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;
+}
+.powered .txt i{color:var(--primary);font-size:.7rem}
+#toTop{
+  position:fixed;right:18px;bottom:22px;width:46px;height:46px;border-radius:50%;
+  background:var(--primary);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  box-shadow:0 8px 22px rgba(108,92,231,.45); opacity:0;pointer-events:none;
+  transition:var(--transition); z-index:900;
+}
+#toTop.show{opacity:1;pointer-events:all}
+#toTop:hover{background:var(--primary-dark);transform:translateY(-4px)}
+@media(max-width:640px){
+  .stats{grid-template-columns:repeat(3,1fr);gap:9px}
+  .stat{padding:12px 6px;border-radius:13px}
+  .stat .v{font-size:1.05rem}
+  .stat .l{font-size:.58rem}
+  .stat i{font-size:.95rem}
+  .grid{grid-template-columns:1fr;gap:14px;padding:6px 16px 34px}
+  .hero{padding:34px 18px 8px}
+  .test-card{padding:18px;border-radius:18px}
+  .num-badge{width:50px;height:50px;border-radius:14px}
+  .num-badge .n{font-size:1.2rem}
+  .section-title{font-size:1rem}
+  .topbar{height:58px;padding:0 14px}
+  .brand{font-size:.95rem}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a href="#" class="brand">
+    <i class="fas fa-graduation-cap"></i>
+    <span class="btxt">SELEXN<small>TEST SERIES</small></span>
+  </a>
+  <div class="top-actions">
+    <button class="icon-btn" onclick="toggleDark()" title="Toggle theme" aria-label="Toggle theme">
+      <i class="fas fa-moon" id="dark-icon"></i>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="credit-badge">
+    <i class="fas fa-bolt"></i> Kya Karoge Mujhe Jaan Kar <i class="fas fa-bolt"></i>
+  </div>
+  <h1>Biology Test Series</h1>
+  <p>Full-length practice tests with instant results, detailed solutions and complete performance analytics.</p>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <i class="fas fa-layer-group"></i>
+    <div class="v" id="stat-tests">0</div>
+    <div class="l">Tests</div>
+  </div>
+  <div class="stat">
+    <i class="fas fa-circle-question"></i>
+    <div class="v" id="stat-questions">0</div>
+    <div class="l">Questions</div>
+  </div>
+  <div class="stat">
+    <i class="fas fa-clock"></i>
+    <div class="v" id="stat-time">0m</div>
+    <div class="l">Practice</div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <i class="fas fa-magnifying-glass"></i>
+    <input type="text" id="search" placeholder="Search test… (e.g. HLTS-7, HLTS-32)" autocomplete="off">
+  </div>
+  <div class="chips" id="chips">
+    <button class="chip active" data-filter="all">All Tests</button>
+    <button class="chip" data-filter="new">New</button>
+    <button class="chip" data-filter="1-10">1 – 10</button>
+    <button class="chip" data-filter="11-20">11 – 20</button>
+    <button class="chip" data-filter="21-32">21 – 32</button>
+  </div>
+</div>
+
+<div class="section-title">
+  <i class="fas fa-book-open"></i>
+  <span>Available Tests</span>
+  <span class="count" id="visible-count">0</span>
+  <span class="line"></span>
+</div>
+
+<main class="grid" id="grid"></main>
+
+<div class="powered">
+  <span class="line"></span>
+  <span class="txt">
+    <i class="fas fa-code"></i> Powered by <strong>Kya Karoge Mujhe Jaan Kar</strong> <i class="fas fa-code"></i>
+  </span>
+  <span class="line"></span>
+</div>
+
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+<script>
+const TESTS = [
+  { id: 1,  file: "Biology_HLTS-1.html",  title: "Biology HLTS-1",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 2,  file: "Biology_HLTS-2.html",  title: "Biology HLTS-2",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 3,  file: "Biology_HLTS-3.html",  title: "Biology HLTS-3",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 4,  file: "Biology_HLTS-4.html",  title: "Biology HLTS-4",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 5,  file: "Biology_HLTS-5.html",  title: "Biology HLTS-5",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 6,  file: "Biology_HLTS-6.html",  title: "Biology HLTS-6",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 7,  file: "Biology_HLTS-7.html",  title: "Biology HLTS-7",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 8,  file: "Biology_HLTS-8.html",  title: "Biology HLTS-8",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 9,  file: "Biology_HLTS-9.html",  title: "Biology HLTS-9",  q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 10, file: "Biology_HLTS-10.html", title: "Biology HLTS-10", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 11, file: "Biology_HLTS-11.html", title: "Biology HLTS-11", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 12, file: "Biology_HLTS-12.html", title: "Biology HLTS-12", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 13, file: "Biology_HLTS-13.html", title: "Biology HLTS-13", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 14, file: "Biology_HLTS-14.html", title: "Biology HLTS-14", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 15, file: "Biology_HLTS-15.html", title: "Biology HLTS-15", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 16, file: "Biology_HLTS-16.html", title: "Biology HLTS-16", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 17, file: "Biology_HLTS-17.html", title: "Biology HLTS-17", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 18, file: "Biology_HLTS-18.html", title: "Biology HLTS-18", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 19, file: "Biology_HLTS-19.html", title: "Biology HLTS-19", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 20, file: "Biology_HLTS-20.html", title: "Biology HLTS-20", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 21, file: "Biology_HLTS-21.html", title: "Biology HLTS-21", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 22, file: "Biology_HLTS-22.html", title: "Biology HLTS-22", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 23, file: "Biology_HLTS-23.html", title: "Biology HLTS-23", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 24, file: "Biology_HLTS-24.html", title: "Biology HLTS-24", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 25, file: "Biology_HLTS-25.html", title: "Biology HLTS-25", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 26, file: "Biology_HLTS-26.html", title: "Biology HLTS-26", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 27, file: "Biology_HLTS-27.html", title: "Biology HLTS-27", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 28, file: "Biology_HLTS-28.html", title: "Biology HLTS-28", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 29, file: "Biology_HLTS-29.html", title: "Biology HLTS-29", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 30, file: "Biology_HLTS-30.html", title: "Biology HLTS-30", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 31, file: "Biology_HLTS-31.html", title: "Biology HLTS-31", q: 90, marks: 360, time: 60, tag: "bio", topic: "Full Syllabus Practice" },
+  { id: 32, file: "Biology_HLTS-32.html", title: "Biology HLTS-32", q: 90, marks: 360, time: 60, tag: "new", topic: "Full Syllabus Practice" }
+];
+
+const grid = document.getElementById('grid');
+const visibleCount = document.getElementById('visible-count');
+let activeFilter = 'all';
+let searchQuery = '';
+
+function matchesFilter(t){
+  if (activeFilter === 'all') return true;
+  if (activeFilter === 'new') return t.tag === 'new';
+  const [min, max] = activeFilter.split('-').map(Number);
+  return t.id >= min && t.id <= max;
+}
+
+function matchesSearch(t){
+  if (!searchQuery) return true;
+  const q = searchQuery.toLowerCase();
+  return (
+    t.title.toLowerCase().includes(q) ||
+    String(t.id).includes(q) ||
+    t.topic.toLowerCase().includes(q) ||
+    t.file.toLowerCase().includes(q)
+  );
+}
+
+function renderCards(){
+  const list = TESTS.filter(t => matchesFilter(t) && matchesSearch(t));
+  visibleCount.textContent = list.length;
+  grid.innerHTML = '';
+  if (!list.length){
+    grid.innerHTML = `<div class="empty"><i class="fas fa-inbox"></i>No tests found. Try a different search or filter.</div>`;
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  list.forEach((t, i) => {
+    const a = document.createElement('a');
+    a.className = 'test-card';
+    a.href = encodeURI(t.file);
+    a.style.animationDelay = Math.min(i, 12) * 0.045 + 's';
+    a.setAttribute('aria-label', `Open ${t.title}`);
+    a.innerHTML = `
+      <div class="card-top">
+        <div class="num-badge">
+          <span class="n">${t.id}</span>
+          <span class="t">TEST</span>
+        </div>
+        <span class="tag ${t.tag === 'new' ? 'new' : 'bio'}">
+          ${t.tag === 'new' ? '★ New' : 'Biology'}
+        </span>
+      </div>
+      <h3>${t.title}</h3>
+      <div class="sub">${t.topic}</div>
+      <div class="meta-row">
+        <span class="meta-pill"><i class="fas fa-circle-question"></i>${t.q} Qs</span>
+        <span class="meta-pill"><i class="fas fa-star"></i>${t.marks} Marks</span>
+        <span class="meta-pill"><i class="far fa-clock"></i>${t.time} min</span>
+      </div>
+      <div class="card-footer">
+        <span class="start-btn"><i class="fas fa-play"></i> Start Test</span>
+        <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+      </div>`;
+    frag.appendChild(a);
+  });
+  grid.appendChild(frag);
+}
+
+function updateStats(){
+  const totalQ = TESTS.reduce((s, t) => s + t.q, 0);
+  const totalT = TESTS.reduce((s, t) => s + t.time, 0);
+  document.getElementById('stat-tests').textContent = TESTS.length;
+  document.getElementById('stat-questions').textContent = totalQ;
+  const h = Math.floor(totalT / 60);
+  const m = totalT % 60;
+  document.getElementById('stat-time').textContent = h > 0 ? (m ? `${h}h ${m}m` : `${h}h`) : `${m}m`;
+}
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  renderCards();
+});
+
+document.getElementById('chips').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  activeFilter = chip.dataset.filter;
+  renderCards();
+});
+
+function toggleDark(){
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  document.getElementById('dark-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  try { localStorage.setItem('selexn-dark', isDark); } catch (e) {}
+}
+
+(function initTheme(){
+  let saved = null;
+  try { saved = localStorage.getItem('selexn-dark'); } catch (e) {}
+  if (saved === 'true'){
+    document.body.classList.add('dark');
+    document.getElementById('dark-icon').className = 'fas fa-sun';
+  }
+})();
+
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+  toTop.classList.toggle('show', window.scrollY > 400);
+}, { passive: true });
+
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== document.getElementById('search')){
+    e.preventDefault();
+    document.getElementById('search').focus();
+  }
+  if (e.key === 'Escape' && document.activeElement === document.getElementById('search')){
+    document.getElementById('search').blur();
+  }
+});
+
+renderCards();
+updateStats();
+</script>
+</body>
+</html>
